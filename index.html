@@ -18,6 +18,10 @@
       </li     <li class="nav-li">
                           <a href="portfolio.html">Portfolio</a>
 </li>
+
+</li     <li class="nav-li"/>
+                          <a href="images.html">images</a>
+</li>
       </nav>
       <main>
        <!-- Sidebar section -->
@@ -30,6 +34,42 @@
 
 <h2>Leonard Burris</h2>
   <p>Student at Covington High School</p>
+
+  <!-- Slideshow Section -->
+  <div class="slideshow-container">
+    <div class="slide fade">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop" alt="Slide 1">
+      <div class="slide-caption">Blue Sky</div>
+    </div>
+
+    <div class="slide fade">
+      <img src="https://images.unsplash.com/photo-1527482797697-8795b1a55a45?w=500&h=300&fit=crop" alt="Slide 2">
+      <div class="slide-caption">Ocean Blue</div>
+    </div>
+
+    <div class="slide fade">
+      <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86e81?w=500&h=300&fit=crop" alt="Slide 3">
+      <div class="slide-caption">Blue Water</div>
+    </div>
+
+    <div class="slide fade">
+      <img src="https://images.unsplash.com/photo-1498855926480-d98e83099315?w=500&h=300&fit=crop" alt="Slide 4">
+      <div class="slide-caption">Blue Vibes</div>
+    </div>
+
+    <!-- Navigation arrows -->
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <!-- Slide dots -->
+  <div class="dots-container">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+  </div>
+
   <ul>
      <h3>Interests</h3>
   </ul>
@@ -39,5 +79,52 @@
    <div class="content">
 </div>
   </div>
+
+  <script>
+    let slideIndex = 1;
+    let slideTimer;
+
+    function changeSlide(n) {
+      clearTimeout(slideTimer);
+      showSlide(slideIndex += n);
+      startAutoSlide();
+    }
+
+    function currentSlide(n) {
+      clearTimeout(slideTimer);
+      showSlide(slideIndex = n);
+      startAutoSlide();
+    }
+
+    function showSlide(n) {
+      const slides = document.getElementsByClassName("slide");
+      const dots = document.getElementsByClassName("dot");
+      
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
+      
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+
+    function startAutoSlide() {
+      slideTimer = setTimeout(() => {
+        slideIndex++;
+        showSlide(slideIndex);
+        startAutoSlide();
+      }, 4000);
+    }
+
+    // Initialize slideshow
+    showSlide(slideIndex);
+    startAutoSlide();
+  </script>
   </body>
 </html>
